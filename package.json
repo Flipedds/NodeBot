@@ -5,7 +5,7 @@
   "main": "bot.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "start": "node bot.js"
   },
   "keywords": [],
@@ -20,6 +20,7 @@
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
+    "jest": "^29.6.1",
     "nodemon": "^3.0.1"
   }
 }
