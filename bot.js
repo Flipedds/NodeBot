@@ -3,7 +3,7 @@ import readlineSync from 'readline-sync';
 import playMp3 from './player/audioPlayer.mjs'
 
 let text = readlineSync.question('Digite a mensagem: ');
-decide(text);
-playMp3();
-
-
+  console.log(text);
+  decide(text);
+  
+  

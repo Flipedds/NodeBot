@@ -2,46 +2,44 @@ import { createWriteStream } from 'fs';
 import { getAudioUrl } from 'google-tts-api';
 import axios from 'axios';
 
-function speech(textToSpeech) {
+async function speech(textToSpeech, outputFile) {
   // Specify the language and voice. For example, 'en' for English, 'en-us' for US English.
-const language = 'pt';
-const voice = 'pt-br';
+  const language = 'pt';
+  const voice = 'pt-br';
 
-// Generate the audio URL
-const audioUrl = getAudioUrl(textToSpeech, {
-  lang: language,
-  slow: false,
-  host: 'https://translate.google.com',
-  splitPunct: ',.;',
-});
-
-// Function to download the audio and save it to a file
-const downloadAudio = async (url, outputFile) => {
-  const response = await axios({
-    url,
-    method: 'GET',
-    responseType: 'stream',
+  // Generate the audio URL
+  const audioUrl = getAudioUrl(textToSpeech, {
+    lang: language,
+    slow: false,
+    host: 'https://translate.google.com',
+    splitPunct: ',.;',
   });
 
-  const audioStream = response.data.pipe(createWriteStream(outputFile));
+  // Function to download the audio and save it to a file
+  const downloadAudio = async (url, outputFile) => {
+    const response = await axios({
+      url,
+      method: 'GET',
+      responseType: 'stream',
+    });
 
-  return new Promise((resolve, reject) => {
-    audioStream.on('finish', () => resolve());
-    audioStream.on('error', (error) => reject(error));
-  });
-};
+    const audioStream = response.data.pipe(createWriteStream(outputFile));
 
-// Call the downloadAudio function to save the audio to a file
-const outputFile = 'output.mp3';
+    return new Promise((resolve, reject) => {
+      audioStream.on('finish', () => resolve());
+      audioStream.on('error', (error) => reject(error));
+    });
+  };
 
-downloadAudio(audioUrl, outputFile)
-  .then(() => {
+  // Call the downloadAudio function to save the audio to the specified file
+  try {
+    await downloadAudio(audioUrl, outputFile);
     console.log('Audio saved:', outputFile);
-  })
-  .catch((error) => {
+    return outputFile;
+  } catch (error) {
     console.error('Error:', error.stack || error);
-  });
-
+  }
 };
 
 export default speech;
+

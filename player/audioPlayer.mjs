@@ -1,11 +1,9 @@
 import playSound from 'play-sound';
 
-const audioFilePath = './output.mp3'; // Substitua pelo caminho do seu arquivo de áudio
-
 const player = playSound({});
 
-const playMp3 = () => {
-    player.play(audioFilePath, (err) => {
+const playMp3 = (path) => {
+    player.play(path, (err) => {
         if (err) {
           console.error('Erro ao reproduzir o arquivo de áudio:', err);
         } else {
