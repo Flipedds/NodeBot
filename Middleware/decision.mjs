@@ -11,7 +11,7 @@ function decide(msg) {
         speech("Até logo")
     }
     else {
-        speech("Posso conversar com você");
+        speech("Desculpe não entendi");
     }
 }
 
