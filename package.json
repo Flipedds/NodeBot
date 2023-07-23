@@ -1,0 +1,24 @@
+{
+  "name": "nodebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon bot.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "google-tts-api": "^2.0.2",
+    "js-yaml": "^4.1.0",
+    "natural": "^6.5.0",
+    "node-aplay": "^1.0.3",
+    "play-sound": "^1.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
